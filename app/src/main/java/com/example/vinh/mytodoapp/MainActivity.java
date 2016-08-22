@@ -1,5 +1,6 @@
 package com.example.vinh.mytodoapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,10 @@ import android.widget.ListView;
 import com.example.vinh.mytodoapp.Data.Date;
 import com.example.vinh.mytodoapp.Data.Task;
 
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements TaskDialogFragment.TaskDialogListener {
@@ -36,24 +41,7 @@ public class MainActivity extends AppCompatActivity implements TaskDialogFragmen
 
         listView.setAdapter(adapter);
 
-//        BufferedReader input = null;
-//        input = new BufferedReader(
-//                new InputStreamReader(openFileInput("myfile")));
-//        String line;
-//        StringBuffer buffer = new StringBuffer();
-//        while ((line = input.readLine()) != null) {
-//            buffer.append(line + "\n");
-//        }
-//        String text = buffer.toString();
-
-        // generate data
-//        Task newTask1 = new Task(1, "task 1", "Medium", new Date(1, 8, 6, 2016));
-//        Task newTask2 = new Task(2, "task 2", "High", new Date(2, 10, 6, 2016));
-//        Task newTask3 = new Task(3, "task 1", "Low", new Date(3, 8, 6, 2016));
-//
-//        adapter.add(newTask1);
-//        adapter.add(newTask2);
-//        adapter.add(newTask3);
+        readFile();
 
         // handle events
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -118,6 +106,68 @@ public class MainActivity extends AppCompatActivity implements TaskDialogFragmen
             task.date = dueDate;
 
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        writeFile();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        writeFile();
+    }
+
+    private void readFile() {
+        try {
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(openFileInput("tester.txt")));
+            String line;
+            StringBuffer text = new StringBuffer();
+            while ((line = bReader.readLine()) != null) {
+                text.append(line);
+            }
+
+            String temp = text.toString();
+            String[] seq = temp.split("-");
+
+            int count = Integer.valueOf(seq[0]);
+
+            for (int i = 0; i < count; i++) {
+                adapter.add(new Task(1, seq[i*5 + 1], seq[i*5 + 2],
+                        new Date(1, Integer.valueOf(seq[i*5 + 3]),
+                                Integer.valueOf(seq[i*5 + 4]),
+                                Integer.valueOf(seq[i*5 + 5]))));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeFile() {
+        String someText;
+
+        someText = Integer.toString(tasks.size());
+
+        for (int i = 0; i < tasks.size(); i++) {
+            someText += "-" + tasks.get(i).name;
+            someText += "-" + tasks.get(i).priority;
+            someText += "-" + Integer.toString(tasks.get(i).date.day);
+            someText += "-" + Integer.toString(tasks.get(i).date.month);
+            someText += "-" + Integer.toString(tasks.get(i).date.year);
+        }
+
+        String FILE_NAME = "tester.txt";
+        try {
+            FileOutputStream fos = openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            fos.write(someText.toString().getBytes());
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
