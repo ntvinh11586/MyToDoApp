@@ -4,7 +4,7 @@
 
 Submitted by: **The-Vinh Nguyen**
 
-Time spent: **18** hours spent in total
+Time spent: **21** hours spent in total
 
 ## User Stories
 
@@ -13,8 +13,7 @@ The following **required** functionality is completed:
 * [x] User can add items to the to-do list
 * [x] User can remove an item by long pressing on the item.
 * [x] User can tap a to-do item and bring up an edit screen for the to-do item and then have any changes to the text reflected in the to-do list.
-* [ ] Persist the to-do items into a text file and retrieve them properly on app restart
-* [ ] Persist the to-do items into SQLite instead of a text file
+* [x] Persist the to-do items into a text file and retrieve them properly on app restart
 * [x] Improve style of the to-do items in the list using a custom adapter
 * [x] Use a DialogFragment instead of new Activity for editing items
 * [x] Add support for completion due dates for todo items (and display in listview item)
@@ -29,7 +28,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![Video Walkthrough](http://i.imgur.com/ZdOuvy5.gif)
+![Video Walkthrough](http://imgur.com/a/vaRMX)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
