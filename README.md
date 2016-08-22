@@ -1,35 +1,35 @@
-# Pre-work - *Name of App Here*
+# Pre-work - *MyToDoApp*
 
-**Name of your app** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
+**MyToDoApp** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
 
-Submitted by: **Your Name Here**
+Submitted by: **The-Vinh Nguyen**
 
-Time spent: **X** hours spent in total
+Time spent: **18** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-* [ ] User can add items to the to-do list
-* [ ] User can remove an item by long pressing on the item.
-* [ ] User can tap a to-do item and bring up an edit screen for the to-do item and then have any changes to the text reflected in the to-do list.
+* [x] User can add items to the to-do list
+* [x] User can remove an item by long pressing on the item.
+* [x] User can tap a to-do item and bring up an edit screen for the to-do item and then have any changes to the text reflected in the to-do list.
 * [ ] Persist the to-do items into a text file and retrieve them properly on app restart
 * [ ] Persist the to-do items into SQLite instead of a text file
-* [ ] Improve style of the to-do items in the list using a custom adapter
-* [ ] Use a DialogFragment instead of new Activity for editing items
-* [ ] Add support for completion due dates for todo items (and display in listview item)
-* [ ] Add support for selecting the priority of each todo item (and display in listview item)
+* [x] Improve style of the to-do items in the list using a custom adapter
+* [x] Use a DialogFragment instead of new Activity for editing items
+* [x] Add support for completion due dates for todo items (and display in listview item)
+* [x] Add support for selecting the priority of each todo item (and display in listview item)
 
 The following **additional** features are implemented:
 
-* [ ] Improve the UI/UX, play with colors, images or backgrounds
+* [x] Improve the UI/UX, play with colors, images or backgrounds
 * [ ] List anything else that you can get done to improve the app functionality!
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-![Video Walkthrough](http://i.imgur.com/link/to/your/gif/file.gif)
+![Video Walkthrough](http://i.imgur.com/ZdOuvy5.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -39,7 +39,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [The-Vinh Nguyen]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
