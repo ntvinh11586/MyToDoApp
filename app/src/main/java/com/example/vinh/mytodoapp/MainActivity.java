@@ -17,12 +17,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements TaskDialogFragment.TaskDialogListener {
 
     private TaskAdapter adapter;
-
     private ArrayList<Task> tasks;
 
-    private ListView listView;
-
     private int changedPosition;
+
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +36,16 @@ public class MainActivity extends AppCompatActivity implements TaskDialogFragmen
 
         listView.setAdapter(adapter);
 
-        Task newTask1 = new Task(1, "task 1", "Medium", new Date(7, 8, 6, 2016));
-        Task newTask2 = new Task(1, "task 2", "High", new Date(7, 8, 6, 2016));
+        // generate data
+        Task newTask1 = new Task(1, "task 1", "Medium", new Date(1, 8, 6, 2016));
+        Task newTask2 = new Task(2, "task 2", "High", new Date(2, 10, 6, 2016));
+        Task newTask3 = new Task(3, "task 1", "low", new Date(3, 8, 6, 2016));
 
         adapter.add(newTask1);
         adapter.add(newTask2);
+        adapter.add(newTask3);
 
-
+        // handle events
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long arg3) {
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements TaskDialogFragmen
                 return false;
             }
         });
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,19 +66,10 @@ public class MainActivity extends AppCompatActivity implements TaskDialogFragmen
                 editNameDialogFragment.show(fm, "fragment_edit_name");
             }
         });
-
-
-
-
-
-
-
-
-
-
-
     }
 
+
+    // ActionBar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -97,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements TaskDialogFragmen
         }
     }
 
+    // TaskDialog handle
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
         TaskDialogFragment editNameDialogFragment = TaskDialogFragment.newInstance(null);

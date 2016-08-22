@@ -26,16 +26,16 @@ import java.util.Calendar;
 
 public class TaskDialogFragment extends DialogFragment {
 
-    private EditText edTaskName;
     private LinearLayout llTaskDialog;
-    private Button btnDiscard;
-    private Button btnSave;
+    private EditText edTaskName;
     private RadioGroup rgPriority;
-    private DatePicker tpDueDate;
     private RadioButton rbPriorityLow;
-    private Task changedTask;
     private RadioButton rbPriorityMedium;
     private RadioButton rbPriorityHigh;
+    private DatePicker tpDueDate;
+    private Button btnDiscard;
+    private Button btnSave;
+
     private int isChanged;
 
     public interface TaskDialogListener {
@@ -90,8 +90,8 @@ public class TaskDialogFragment extends DialogFragment {
         rbPriorityMedium = (RadioButton)view.findViewById(R.id.radio_medium);
         rbPriorityHigh = (RadioButton)view.findViewById(R.id.radio_high);
 
+        // init and get Task data
         isChanged = getArguments().getInt("available");
-
         if (isChanged == 1) {
             edTaskName.setText(getArguments().getString("name"));
             if (!edTaskName.getText().toString().equals(""))
@@ -128,6 +128,46 @@ public class TaskDialogFragment extends DialogFragment {
                     null);
         }
 
+        // disable softkeyboard
+        llTaskDialog.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+                return false;
+            }
+        });
+        edTaskName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        });
+        rbPriorityLow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        });
+        rbPriorityMedium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        });
+        rbPriorityHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        });
+
+        // handle view
         edTaskName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -148,25 +188,6 @@ public class TaskDialogFragment extends DialogFragment {
             }
         });
 
-        // handle events
-        edTaskName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        });
-
-        llTaskDialog.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
-                return false;
-            }
-        });
-
         
         btnDiscard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,8 +195,6 @@ public class TaskDialogFragment extends DialogFragment {
                 getDialog().dismiss();
             }
         });
-
-
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
