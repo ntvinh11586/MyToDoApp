@@ -1,23 +1,27 @@
 package com.example.vinh.mytodoapp;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 
 import com.example.vinh.mytodoapp.Data.Date;
 import com.example.vinh.mytodoapp.Data.Task;
@@ -26,7 +30,7 @@ import java.util.Calendar;
 
 public class TaskDialogFragment extends DialogFragment {
 
-    private LinearLayout llTaskDialog;
+    private ScrollView llTaskDialog;
     private EditText edTaskName;
     private RadioGroup rgPriority;
     private RadioButton rbPriorityLow;
@@ -71,8 +75,6 @@ public class TaskDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
         return inflater.inflate(R.layout.fragment_task_dialog, container);
     }
 
@@ -81,7 +83,7 @@ public class TaskDialogFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         edTaskName = (EditText)view.findViewById(R.id.text_input_text);
-        llTaskDialog = (LinearLayout)view.findViewById(R.id.layout_task_description);
+        llTaskDialog = (ScrollView)view.findViewById(R.id.layout_task_description);
         btnDiscard = (Button)view.findViewById(R.id.button_discard);
         btnSave = (Button)view.findViewById(R.id.button_save);
         rgPriority = (RadioGroup)view.findViewById(R.id.radio_group_priority_1);
@@ -216,12 +218,15 @@ public class TaskDialogFragment extends DialogFragment {
 
     @Override
     public void onResume() {
-        // Get existing layout params for the window
-        ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
-        // Assign window properties to fill the parent
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = WindowManager.LayoutParams.MATCH_PARENT;
-        getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+        // Store access variables for window and blank point
+        Window window = getDialog().getWindow();
+        Point size = new Point();
+        // Store dimensions of the screen in `size`
+        Display display = window.getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+        // Set the width of the dialog proportional to 75% of the screen width
+        window.setLayout((int) (size.x * 0.95), WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
         // Call super onResume after sizing
         super.onResume();
     }
