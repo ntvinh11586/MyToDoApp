@@ -36,14 +36,24 @@ public class MainActivity extends AppCompatActivity implements TaskDialogFragmen
 
         listView.setAdapter(adapter);
 
-        // generate data
-        Task newTask1 = new Task(1, "task 1", "Medium", new Date(1, 8, 6, 2016));
-        Task newTask2 = new Task(2, "task 2", "High", new Date(2, 10, 6, 2016));
-        Task newTask3 = new Task(3, "task 1", "Low", new Date(3, 8, 6, 2016));
+//        BufferedReader input = null;
+//        input = new BufferedReader(
+//                new InputStreamReader(openFileInput("myfile")));
+//        String line;
+//        StringBuffer buffer = new StringBuffer();
+//        while ((line = input.readLine()) != null) {
+//            buffer.append(line + "\n");
+//        }
+//        String text = buffer.toString();
 
-        adapter.add(newTask1);
-        adapter.add(newTask2);
-        adapter.add(newTask3);
+        // generate data
+//        Task newTask1 = new Task(1, "task 1", "Medium", new Date(1, 8, 6, 2016));
+//        Task newTask2 = new Task(2, "task 2", "High", new Date(2, 10, 6, 2016));
+//        Task newTask3 = new Task(3, "task 1", "Low", new Date(3, 8, 6, 2016));
+//
+//        adapter.add(newTask1);
+//        adapter.add(newTask2);
+//        adapter.add(newTask3);
 
         // handle events
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
