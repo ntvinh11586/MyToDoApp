@@ -34,7 +34,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         tvDate.setText(Integer.toString(task.date.day)
                     + " " + Integer.toString(task.date.month)
                     + " " + Integer.toString(task.date.year));
-        tvPriority.setText(Integer.toString(task.priority));
+        tvPriority.setText(task.priority);
 
         return convertView;
     }

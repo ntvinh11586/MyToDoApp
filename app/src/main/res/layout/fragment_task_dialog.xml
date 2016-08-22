@@ -26,35 +26,40 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="PRIORITY"
-        android:id="@+id/textView1" />
+        android:id="@+id/textView1"
+        android:enabled="false"/>
 
-    <LinearLayout
+    <RadioGroup
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="wrap_content"
+        android:id="@+id/radio_group_priority_1">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Low"
+            android:checked="true"
             android:id="@+id/radio_low" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium"
+            android:checked="false"
             android:id="@+id/radio_medium" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="High"
+            android:checked="false"
             android:id="@+id/radio_high" />
-    </LinearLayout>
+    </RadioGroup>
 
     <DatePicker
-        android:layout_width="214dp"
-        android:layout_height="221dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/date_picker_due_date"
         android:layout_gravity="center_horizontal"
         android:calendarViewShown="false"
@@ -72,6 +77,7 @@
         android:layout_height="wrap_content"
         android:text="Save"
         android:id="@+id/button_save"
+        android:enabled="false"
         android:layout_gravity="center_horizontal" />
 
 
