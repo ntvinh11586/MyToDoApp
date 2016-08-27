@@ -43,7 +43,7 @@ public class TaskDialogFragment extends DialogFragment {
     private int isChanged;
 
     public interface TaskDialogListener {
-        void onFinishTaskDialog(int isChanged, final int id, final String taskName, final String priority, final Date dueDate);
+        void onFinishTaskDialog(int isChanged, final String taskName, final String priority, final Date dueDate);
     }
 
     public TaskDialogFragment() {
@@ -57,7 +57,6 @@ public class TaskDialogFragment extends DialogFragment {
 
         if (task != null) {
             args.putInt("available", 1);
-            args.putInt("id", task.id);
             args.putString("name", task.name);
             args.putString("priority", task.priority);
             args.putInt("day", task.date.day);
@@ -190,7 +189,7 @@ public class TaskDialogFragment extends DialogFragment {
             }
         });
 
-        
+        // handle buttons
         btnDiscard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -204,12 +203,12 @@ public class TaskDialogFragment extends DialogFragment {
                 RadioButton rbPriority = (RadioButton)getView().findViewById(selectedId);
                 String priority = rbPriority.getText().toString();
 
-                Date dueDate = new Date(1, tpDueDate.getDayOfMonth(), tpDueDate.getMonth() + 1, tpDueDate.getYear());
+                Date dueDate = new Date(tpDueDate.getDayOfMonth(), tpDueDate.getMonth() + 1, tpDueDate.getYear());
 
                 String taskName = edTaskName.getText().toString();
 
                 TaskDialogListener listener = (TaskDialogListener) getActivity();
-                listener.onFinishTaskDialog(isChanged, 1, taskName, priority, dueDate);
+                listener.onFinishTaskDialog(isChanged, taskName, priority, dueDate);
 
                 getDialog().dismiss();
             }
@@ -218,16 +217,16 @@ public class TaskDialogFragment extends DialogFragment {
 
     @Override
     public void onResume() {
-        // Store access variables for window and blank point
+
         Window window = getDialog().getWindow();
         Point size = new Point();
-        // Store dimensions of the screen in `size`
+
         Display display = window.getWindowManager().getDefaultDisplay();
         display.getSize(size);
-        // Set the width of the dialog proportional to 75% of the screen width
+
         window.setLayout((int) (size.x * 0.95), WindowManager.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER);
-        // Call super onResume after sizing
+
         super.onResume();
     }
 }
